@@ -1,0 +1,71 @@
+#API
+
+'''Google pay, paytm, phone pay , we all are using 
+lets suppose  use google pay, 
+for transaction first check valid user or not
+2nd balance is enough or not
+goofle pay is designed by using different technoloöy , lets suppose
+monstech, or nativ, or react nativ, bank hdfc design by java.
+
+now 2 system , how can communicate, application programing interface (api) , help 
+to talk with different system, whatever u want to do. 
+there are some function to check this validity of user, fn will give a return 
+so, api is being used to communicate to hatoroginious or homoginious system to 
+work.
+any single app is dependet 
+
+#we will use flask
+# jango willnot b used in this course# jaango is required for web developer
+but just for data science flask is the best
+
+'''
+'''
+we hv to download postman , we will write code in pycharm and access this code in
+postman. postman is a tool which has been used to test an api
+
+download postman
+
+'''
+'''
+#to create a function which will take to input and it will give its summation
+# i dont want to execute
+'''
+from flask import Flask, request, jsonify   #import flask and install pip install Flask
+#flask library or class help to expose ur code to the outer world
+def test(a,b):
+    return a+b
+app =Flask(__name__)  #this is obj of flask class to use all the thngs of flask class 
+
+# i dont want to print this function from here, i want to execute in another website or
+# another site like postman . in this situation i need to connect this and another
+#
+#print(test(4,5))
+
+#lets creat onemore fn
+@app.route('/abc', methods = ['GET', 'POST'])
+#@app , here i am calling obj. route is fn which has deifindeed to create woute for this 
+
+#here route('/abc') is the link of my computer to access it 
+#get means we are sending a data by url or browser, where everyone can see my data,
+#post means we are sending a data by body where it cant visible in url 
+
+def test1():
+    if (request.method=='method'):
+        a=request.json['num1']  #requesting to send data in json format and num1 that data people will send
+        b=request.json['num2']
+        result= a+b
+        return jsonify((str(result))) 
+ 
+#instantiate
+#
+if__name__=='__main__':
+    app.run()
+
+    
+#__name__=='__main__ it will call all the classes in python
+#error 400 indicates server is error ur url is not working
+#post error 
+#
+
+        
+
