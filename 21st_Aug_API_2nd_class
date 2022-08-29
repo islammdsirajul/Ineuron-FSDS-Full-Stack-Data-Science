@@ -90,6 +90,7 @@ def test():
     mail_id = request.args.get('mail_id')
 
     return "this is my first function for get {} {} {}".format(get_name ,mobile_number,mail_id )
+    #uporer ei system e unsecure mode e data include kora jay, ar ek ee get bole
     
 @app.route('/get_data')
 def get_data_from():
