@@ -9,7 +9,8 @@ For challenge submission - https://docs.google.com/forms/d/e/1FAIpQLSeYPTJkFaZt0
 import os
 import time
 import requests
-from selenium import webdriver
+from selenium import webdriver   # it can b used to automate browsers, it can open google chrome automatically
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -26,13 +27,14 @@ def fetch_image_urls(query: str, max_links_to_fetch: int, wd: webdriver, sleep_b
     wd.get(search_url.format(q=query))
     wd.implicitly_wait(30)
 
-    image_urls = set()
-    image_count = 0
+    image_urls = set() # collect all the url of images 
+    image_count = 0    
     results_start = 0
     while image_count < max_links_to_fetch:
         scroll_to_end(wd)
 
         # get all image thumbnail results
+        
         thumbnail_results = wd.find_elements_by_css_selector("img.Q4LuWd")
         number_results = len(thumbnail_results)
 
@@ -68,6 +70,7 @@ def fetch_image_urls(query: str, max_links_to_fetch: int, wd: webdriver, sleep_b
 
     return image_urls
 
+#flowing fn to store images in a hierarchy/  into a databases
 
 def persist_image(folder_path:str,url:str, counter):
     try:
@@ -84,14 +87,13 @@ def persist_image(folder_path:str,url:str, counter):
     except Exception as e:
         print(f"ERROR - Could not save {url} - {e}")
 
-
+#flowing fn to search for and download it, this fn is taking 4 parameter, 1st search_term: str, target_path = './images means it will save pictures in this directory ex images folder 
 def search_and_download(search_term: str, driver_path: str, target_path='./images', number_images=10):
-    target_folder = os.path.join(target_path, '_'.join(search_term.lower().split(' ')))
-
+    target_folder = os.path.join(target_path, '_'.join(search_term.lower().split(' '))) '''#target_folder is a variable we ar tryng to create'''
     if not os.path.exists(target_folder):
-        os.makedirs(target_folder)
+        os.makedirs(target_folder)   # makedirs means create a directory
 
-    with webdriver.Chrome(executable_path=driver_path) as wd:
+    with webdriver.Chrome(executable_path=driver_path) as wd:  # webdriver we get from seleum class, it will load drivers from chrome driver.exe file , wd is just a alias
         res = fetch_image_urls(search_term, number_images, wd=wd, sleep_between_interactions=0.5)
 
     counter = 0
@@ -113,6 +115,11 @@ search_term = 'sudhanshu ineuron'
 # num of images you can pass it from here  by default it's 10 if you are not passing
 #number_images = 50
 search_and_download(search_term=search_term, driver_path=DRIVER_PATH, number_images=10)
+
+
+#terminal e directory thik korar jonno : conda activate base 
+#conda activate imgscrap
+
 
 
 
